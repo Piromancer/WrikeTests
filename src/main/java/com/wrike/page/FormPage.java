@@ -9,12 +9,16 @@ import java.util.List;
 
 public class FormPage extends Page {
 
-    @FindBy(xpath = "//div[@class='radio']")
+
+    @FindBy(xpath = "//*[@name='survey-form']//*[@class='survey-question' or @class='radio']")
     private List<WebElement> formElements;
     @FindBy(xpath = "//*[@name='survey-form']//button[@type='submit']")
     private WebElement submit;
     @FindBy(xpath = "//*[@class='survey-success' or @class='resend-page__cell--success']")
     private WebElement success;
+    private WebElement twitterIcon;
+    @FindBy(xpath = "//input[@type='text']")
+    private WebElement otherTextSection;
 
     public FormPage(WebDriver driver) {
         super(driver);
@@ -30,5 +34,17 @@ public class FormPage extends Page {
 
     public boolean successIsDisplayed(){
         return success.isDisplayed();
+    }
+
+    public String getTwitterHRef(){
+        return twitterIcon.getAttribute("href");
+    }
+
+    public WebElement getTwitterElement(){
+        return twitterIcon;
+    }
+
+    public void fillOtherSection(){
+        if(otherTextSection.isDisplayed()) otherTextSection.sendKeys(RandomGenerator.generateString(5,20));
     }
 }

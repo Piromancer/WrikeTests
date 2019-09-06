@@ -6,6 +6,7 @@ import com.wrike.util.RandomGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.qameta.allure.Step;
 
 public class MainSteps implements Stepper {
     private MainPage main;
@@ -24,22 +25,26 @@ public class MainSteps implements Stepper {
     public void runSteps(){
         openMain();
         clickGetStarted();
-        enterRandomEMail();
+        enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
         submitEMail();
     }
 
+    @Step("Opening wrike.com")
     private void openMain(){
         driver.get(mainURL);
     }
 
+    @Step("Clicking the \"Get started for free!\" button")
     private void clickGetStarted() {
         main.clickStartForFree();
     }
 
-    private void enterRandomEMail(){
-        main.enterEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
+    @Step("Sending a generated EMail ({email})")
+    private void enterRandomEMail(String email){
+        main.enterEMail(email);
     }
 
+    @Step("Clicking the \"Create my Wrike account\" button")
     private void submitEMail(){
         main.submitEMail();
         new WebDriverWait(driver, waitTime)

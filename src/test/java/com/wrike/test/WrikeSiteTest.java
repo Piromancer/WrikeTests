@@ -11,12 +11,12 @@ import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
 public class WrikeSiteTest {
-    private WebDriver driver;
+    private static WebDriver driver;
 
     private static String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
 
-    @Before
-    public void setDriver(){
+    @BeforeClass
+    public static void setDriver(){
         driver = ChromeDriverConfig.getChromeDriver();
     }
 
@@ -26,20 +26,18 @@ public class WrikeSiteTest {
     public void getStartedTest(){
         MainSteps mainSteps = new MainSteps(driver);
         mainSteps.runSteps();
+    }
+
+    @Test
+    @DisplayName("Form functionality test")
+    @Description("Form is filled with random answers and then test checks if it was submitted successfully")
+    public void formTest(){
         FormSteps formSteps = new FormSteps(driver);
         formSteps.runSteps();
     }
 
-//    @Test
-//    @DisplayName("Form functionality test")
-//    @Description("Form is filled with random answers and then test checks if it was submitted successfully")
-//    public void formTest(){
-//        FormSteps formSteps = new FormSteps(driver);
-//        formSteps.runSteps();
-//    }
-
-    @After
-    public void closeDriver(){
+    @AfterClass
+    public static void closeDriver(){
         driver.quit();
     }
 }

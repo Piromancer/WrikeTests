@@ -5,16 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends Page {
-    @FindBy(xpath = "/html/body/div[1]/header/div[3]/div[2]/div/div/div[2]/div/form/button")
+    @FindBy(xpath = "//*[@class='wg-header__desktop']//*[contains(@class,'wg-header__free-trial-button')]")
     private WebElement startForFree;
     @FindBy(xpath = "//*[@id=\"modal-pro\"]/form/label[1]/input")
     private WebElement inputEMail;
     @FindBy(xpath = "//*[@id=\"modal-pro\"]/form/label[2]/button")
     private WebElement submitEMail;
-    @FindBy(xpath = "/html/body/div[1]/div/div[3]/div/div[1]/div")
-    private WebElement footer;
-    @FindBy(xpath = "//*[@id=\"twitter\"]/path")
-    private WebElement twitterIcon;
 
     public MainPage(WebDriver driver) {
         super(driver);
