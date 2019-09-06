@@ -1,6 +1,7 @@
 package com.wrike.test;
 
 import com.wrike.config.ChromeDriverConfig;
+import com.wrike.page.MainPage;
 import com.wrike.util.PropertiesConfigurator;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class WrikeSiteTest {
     private WebDriver driver;
 
-    private static String startURL = PropertiesConfigurator.getConfigProperties().getProperty("test.startURL");
+    private static String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
 
     @Before
     public void setDriver(){
@@ -21,9 +22,11 @@ public class WrikeSiteTest {
     @DisplayName("Get started functionality test")
     @Description("EMail validation. Q&A test")
     public void getStartedTest(){
-        driver.get(startURL);
-        driver.manage().window().maximize();
-        assert driver.getTitle().equals("Your online project management software - Wrike");
+        MainPage mainPage = new MainPage(driver);
+        driver.get(mainURL);
+        mainPage.clickStartForFree();
+        mainPage.enterRandomEMail();
+        mainPage.submitEMail();
     }
 
     @After
