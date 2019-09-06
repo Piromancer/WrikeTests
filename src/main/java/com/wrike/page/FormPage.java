@@ -16,9 +16,14 @@ public class FormPage extends Page {
     private WebElement submit;
     @FindBy(xpath = "//*[@class='survey-success' or @class='resend-page__cell--success']")
     private WebElement success;
+
     private WebElement twitterIcon;
+
     @FindBy(xpath = "//input[@type='text']")
     private WebElement otherTextSection;
+
+    @FindBy(xpath = "//span[@class='survey-question-radio__icon]")
+    private List<WebElement> answers;
 
     public FormPage(WebDriver driver) {
         super(driver);
