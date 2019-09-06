@@ -1,6 +1,5 @@
 package com.wrike.page;
 
-import com.wrike.util.RandomStringGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,8 +24,8 @@ public class MainPage extends Page {
         startForFree.click();
     }
 
-    public void enterRandomEMail(){
-        inputEMail.sendKeys(RandomStringGenerator.generate(5, 12) +"@wriketask.qaa");
+    public void enterEMail(String email){
+        inputEMail.sendKeys(email);
     }
 
     public void submitEMail(){
