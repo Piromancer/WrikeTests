@@ -6,25 +6,25 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends Page {
     @FindBy(xpath = "//*[@class='wg-header__desktop']//*[contains(@class,'wg-header__free-trial-button')]")
-    private WebElement startForFree;
+    public WebElement startForFree;
     @FindBy(xpath = "//*[@id=\"modal-pro\"]/form/label[1]/input")
-    private WebElement inputEMail;
+    public WebElement inputEMail;
     @FindBy(xpath = "//*[@id=\"modal-pro\"]/form/label[2]/button")
-    private WebElement submitEMail;
+    public WebElement submitEMail;
 
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickStartForFree(){
-        startForFree.click();
-    }
-
-    public void enterEMail(String email){
-        inputEMail.sendKeys(email);
-    }
-
-    public void submitEMail(){
-        submitEMail.click();
-    }
+//    public void clickStartForFree(){
+//        startForFree.click();
+//    }
+//
+//    public void enterEMail(String email){
+//        inputEMail.sendKeys(email);
+//    }
+//
+//    public void submitEMail(){
+//        submitEMail.click();
+//    }
 }

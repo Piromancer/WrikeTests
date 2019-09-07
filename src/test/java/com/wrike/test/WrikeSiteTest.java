@@ -5,6 +5,7 @@ import com.wrike.page.MainPage;
 import com.wrike.step.FormSteps;
 import com.wrike.step.MainSteps;
 import com.wrike.util.PropertiesConfigurator;
+import com.wrike.util.RandomGenerator;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
@@ -14,6 +15,7 @@ public class WrikeSiteTest {
     private static WebDriver driver;
 
     private static String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
+    private static final String emailPostfix = PropertiesConfigurator.getConfigProperties().getProperty("test.emailPostfix");
 
     @BeforeClass
     public static void setDriver(){
@@ -25,15 +27,22 @@ public class WrikeSiteTest {
     @Description("EMail validation. Q&A test")
     public void getStartedTest(){
         MainSteps mainSteps = new MainSteps(driver);
-        mainSteps.runSteps();
+        mainSteps.openMain();
+        mainSteps.clickGetStarted();
+        mainSteps.enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
+        mainSteps.submitEMail();
+        FormSteps formSteps = new FormSteps(driver);
+        formSteps.fillForm();
+        formSteps.clickSubmit();
+        formSteps.checkSubmission();
     }
 
     @Test
-    @DisplayName("Form functionality test")
-    @Description("Form is filled with random answers and then test checks if it was submitted successfully")
-    public void formTest(){
-        FormSteps formSteps = new FormSteps(driver);
-        formSteps.runSteps();
+    @DisplayName("Twitter reference and icon test")
+    @Description("Checking twitter reference. Checking if the picture is actually a picture of twitter")
+    public void twitterTest(){
+        MainSteps mainSteps = new MainSteps(driver);
+
     }
 
     @AfterClass

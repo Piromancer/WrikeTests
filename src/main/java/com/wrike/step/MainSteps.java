@@ -8,45 +8,44 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.qameta.allure.Step;
 
-public class MainSteps implements Stepper {
+public class MainSteps{
     private MainPage main;
     private WebDriver driver;
     private static final String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
     private static final String formURL = PropertiesConfigurator.getConfigProperties().getProperty("test.formPathRegex");
     private static final int waitTime = Integer.parseInt(PropertiesConfigurator.getConfigProperties().getProperty("test.loadingWaitTime"));
-    private static final String emailPostfix = PropertiesConfigurator.getConfigProperties().getProperty("test.emailPostfix");
+
 
     public MainSteps(WebDriver driver){
         this.driver = driver;
         main = new MainPage(this.driver);
     }
 
-    @Override
-    public void runSteps(){
-        openMain();
-        clickGetStarted();
-        enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
-        submitEMail();
-    }
+//    public void runSteps(){
+//        openMain();
+//        clickGetStarted();
+//        enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
+//        submitEMail();
+//    }
 
     @Step("Opening wrike.com")
-    private void openMain(){
+    public void openMain(){
         driver.get(mainURL);
     }
 
     @Step("Clicking the \"Get started for free!\" button")
-    private void clickGetStarted() {
-        main.clickStartForFree();
+    public void clickGetStarted() {
+        main.startForFree.click();
     }
 
     @Step("Sending a generated EMail ({email})")
-    private void enterRandomEMail(String email){
-        main.enterEMail(email);
+    public void enterRandomEMail(String email){
+        main.inputEMail.sendKeys(email);
     }
 
     @Step("Clicking the \"Create my Wrike account\" button")
-    private void submitEMail(){
-        main.submitEMail();
+    public void submitEMail(){
+        main.submitEMail.click();
         new WebDriverWait(driver, waitTime)
                 .withMessage("Wrong URL after redirect.\nReceived: "+driver.getCurrentUrl()+"\nExpected: "+formURL)
                 .until(ExpectedConditions.urlMatches(formURL));
