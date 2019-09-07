@@ -17,8 +17,8 @@ public class WrikeSiteTest {
     private static String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
     private static final String emailPostfix = PropertiesConfigurator.getConfigProperties().getProperty("test.emailPostfix");
 
-    @BeforeClass
-    public static void setDriver(){
+    @Before
+    public void setDriver(){
         driver = ChromeDriverConfig.getChromeDriver();
     }
 
@@ -42,11 +42,13 @@ public class WrikeSiteTest {
     @Description("Checking twitter reference. Checking if the picture is actually a picture of twitter")
     public void twitterTest(){
         MainSteps mainSteps = new MainSteps(driver);
-
+        mainSteps.openMain();
+        mainSteps.checkTwitterHref();
+        mainSteps.checkTwitterData();
     }
 
-    @AfterClass
-    public static void closeDriver(){
+    @After
+    public void closeDriver(){
         driver.quit();
     }
 }

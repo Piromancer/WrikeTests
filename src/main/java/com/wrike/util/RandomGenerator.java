@@ -19,12 +19,4 @@ public class RandomGenerator {
         }
         return res.toString();
     }
-
-    public static void generateAnswers(List<WebElement> formElements){
-        for(WebElement question : formElements){
-            List<WebElement> answers = question.findElements(By.xpath(".//*[contains(@class,'survey-question-radio__container') or contains(@class,'switch__button')]"));
-            WebElement chosenElement = answers.get(r.nextInt(answers.size()));
-            chosenElement.click();
-        }
-    }
 }

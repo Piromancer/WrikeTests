@@ -1,12 +1,9 @@
 package com.wrike.page;
 
-import com.wrike.util.RandomGenerator;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
@@ -24,33 +21,8 @@ public class FormPage extends Page {
     public WebElement success;
     @FindBy(xpath = "//input[@type='text']")
     public WebElement otherTextSection;
-    public WebElement twitterIcon;
 
     public FormPage(WebDriver driver) {
         super(driver);
     }
-
-//    public void clickSubmit(){
-//        submit.click();
-//    }
-//
-//    public void fillFormRandomly(){
-//        RandomGenerator.generateAnswers(formElements);
-//    }
-
-//    public boolean successIsDisplayed(){
-//        return success.isDisplayed();
-//    }
-
-//    public String getTwitterHRef(){
-//        return twitterIcon.getAttribute("href");
-//    }
-
-//    public WebElement getTwitterElement(){
-//        return twitterIcon;
-//    }
-//
-//    public void fillOtherSection(){
-//        if(otherTextSection.isDisplayed()) otherTextSection.sendKeys(RandomGenerator.generateString(5,20));
-//    }
 }

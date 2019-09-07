@@ -25,12 +25,6 @@ public class FormSteps {
         formPage = new FormPage(this.driver);
     }
 
-//    public void runSteps() {
-//        fillForm();
-//        clickSubmit();
-//        checkSubmission();
-//    }
-
     @Step("Filling a form with random data")
     public void fillForm() {
         if (!formPage.formElements.get(0).getTagName().equals("span"))
@@ -64,11 +58,4 @@ public class FormSteps {
                 .until(dr -> formPage.success.isDisplayed());
     }
 
-//    private void twitterURLCheck() {
-//        assert twitterURL.equals(formPage.twitterIcon.getAttribute("href"));
-//    }
-//
-//    private void twitterPictureCheck() {
-//
-//    }
 }
