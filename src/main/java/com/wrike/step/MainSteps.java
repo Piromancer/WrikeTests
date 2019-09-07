@@ -7,24 +7,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.qameta.allure.Step;
 
-import javax.imageio.ImageIO;
-import org.openqa.selenium.io.FileHandler;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.coordinates.Coords;
-import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-
-import java.io.File;
-import java.io.IOException;
-
 public class MainSteps{
     private MainPage main;
     private WebDriver driver;
     private static final String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
     private static final String formURL = PropertiesConfigurator.getConfigProperties().getProperty("test.formPathRegex");
+    private static final String imgURL = mainURL+PropertiesConfigurator.getConfigProperties().getProperty("test.twitterImgURL");
+    private static final String imgData = PropertiesConfigurator.getConfigProperties().getProperty("test.twitterPictureData");
+    private static final String imgColor = PropertiesConfigurator.getConfigProperties().getProperty("test.twitterPictureFill");
     private static final int waitTime = Integer.parseInt(PropertiesConfigurator.getConfigProperties().getProperty("test.loadingWaitTime"));
-
 
     public MainSteps(WebDriver driver){
         this.driver = driver;
@@ -59,26 +50,11 @@ public class MainSteps{
         assert main.twitter.getAttribute("href").equals("https://twitter.com/wrike");
     }
 
+    @Step("Checking the data and color match")
     public void checkTwitterData(){
-        //driver.manage().window().maximize();
-        Screenshot screen = new AShot()
-                .shootingStrategy(ShootingStrategies.viewportPasting(500))
-                .coordsProvider(new CoordsProvider() {
-                    @Override
-                    public Coords ofElement(WebDriver webDriver, WebElement element) {
-                        Point point = element.getLocation();
-                        Dimension dimension = element.getSize();
-                        return new Coords(point.getX() + 43, point.getY() + 157, dimension.getWidth(), dimension.getHeight());
-
-                    }
-                })
-                .takeScreenshot(driver, main.twitterPicture);
-        try {
-            ImageIO.write(screen.getImage(), "png", new File("src/main/resources/twitter.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int a = 3;
+        driver.get(imgURL);
+        WebElement img = driver.findElement(By.xpath("//*[@id='twitter']")).findElements(By.xpath(".//*")).get(1);
+        assert img.getAttribute("d").equals(imgData) && img.getAttribute("fill").equals(imgColor);
     }
 
 //    public void saveTwitterPicture(){
@@ -88,5 +64,5 @@ public class MainSteps{
 //        } catch (IOException e) {
 //            System.out.println("Couldn't save picture");
 //        }
-//    }
+//    } <use xlink:href="/content/themes/wrike/dist/img/sprite/vector/footer-icons.symbol.svg?v2#twitter"></use>
 }
