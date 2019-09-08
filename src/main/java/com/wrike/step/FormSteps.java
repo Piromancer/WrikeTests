@@ -13,12 +13,11 @@ import java.util.List;
 import java.util.Random;
 
 public class FormSteps {
+
     private WebDriver driver;
     private FormPage formPage;
 
     private static final int waitTime = Integer.parseInt(PropertiesConfigurator.getConfigProperties().getProperty("test.loadingWaitTime"));
-    private static final String twitterURL = PropertiesConfigurator.getConfigProperties().getProperty("test.twitterURL");
-    private static final String alternativeURL = PropertiesConfigurator.getConfigProperties().getProperty("test.alternativeFormURL");
 
     public FormSteps(WebDriver driver) {
         this.driver = driver;
@@ -26,33 +25,42 @@ public class FormSteps {
     }
 
     @Step("Filling a form with random data")
-    public void fillForm() {
+    public FormSteps fillForm() {
         if (!formPage.formElements.get(0).getTagName().equals("span"))
             for (WebElement question : formPage.formElements) {
                 List<WebElement> answers = question.findElements(By.xpath(".//*[contains(@class,'switch__button')]"));
-                WebElement chosenElement = answers.get(new Random().nextInt(answers.size()));
-                chosenElement.click();
+                answers.get(new Random().nextInt(answers.size())).click();
             }
         else {
             Random r = new Random();
-            new WebDriverWait(driver, waitTime).until(drv -> formPage.formElements.get(0).isDisplayed() && formPage.formElements.get(1).isDisplayed());
+            new WebDriverWait(driver, waitTime)
+                    .until(drv -> formPage.formElements.get(0).isDisplayed()
+                            && formPage.formElements.get(1).isDisplayed());
             formPage.formElements.get(r.nextInt(2)).click();
-            new WebDriverWait(driver, waitTime).until(drv -> formPage.formElements.get(2).isDisplayed() && formPage.formElements.get(3).isDisplayed() && formPage.formElements.get(4).isDisplayed());
+            new WebDriverWait(driver, waitTime)
+                    .until(drv -> formPage.formElements.get(2).isDisplayed()
+                            && formPage.formElements.get(3).isDisplayed()
+                            && formPage.formElements.get(4).isDisplayed());
             formPage.formElements.get(r.nextInt(3)+2).click();
-            new WebDriverWait(driver, waitTime).until(drv -> formPage.formElements.get(5).isDisplayed() && formPage.formElements.get(6).isDisplayed() && formPage.formElements.get(7).isDisplayed());
+            new WebDriverWait(driver, waitTime)
+                    .until(drv -> formPage.formElements.get(5).isDisplayed()
+                            && formPage.formElements.get(6).isDisplayed()
+                            && formPage.formElements.get(7).isDisplayed());
             formPage.formElements.get(r.nextInt(3)+5).click();
         }
         if (formPage.otherTextSection.isDisplayed())
             formPage.otherTextSection.sendKeys(RandomGenerator.generateString(5, 20));
+        return this;
     }
 
     @Step("Clicking submit")
-    public void clickSubmit() {
+    public FormSteps clickSubmit() {
         formPage.submit.click();
+        return this;
     }
 
-    @Step("Checking if the message about successful submission appeared")
-    public void checkSubmission() {
+    @Step("Checking message successful submission")
+    public void checkMessageSuccessfulSubmission() {
         new WebDriverWait(driver, waitTime)
                 .withMessage("Submission wasn't successful")
                 .until(dr -> formPage.success.isDisplayed());

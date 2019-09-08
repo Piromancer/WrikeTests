@@ -1,7 +1,6 @@
 package com.wrike.test;
 
 import com.wrike.config.ChromeDriverConfig;
-import com.wrike.page.MainPage;
 import com.wrike.step.FormSteps;
 import com.wrike.step.MainSteps;
 import com.wrike.util.PropertiesConfigurator;
@@ -12,43 +11,44 @@ import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
 public class WrikeSiteTest {
-    private static WebDriver driver;
 
-    private static String mainURL = PropertiesConfigurator.getConfigProperties().getProperty("test.mainURL");
+    private WebDriver driver;
+    private MainSteps mainSteps;
+    private FormSteps formSteps;
+
     private static final String emailPostfix = PropertiesConfigurator.getConfigProperties().getProperty("test.emailPostfix");
 
     @Before
-    public void setDriver(){
+    public void prepare() {
         driver = ChromeDriverConfig.getChromeDriver();
+        mainSteps = new MainSteps(driver);
+        formSteps = new FormSteps(driver);
     }
 
     @Test
     @DisplayName("Get started functionality test")
     @Description("EMail validation. Q&A test")
-    public void getStartedTest(){
-        MainSteps mainSteps = new MainSteps(driver);
-        mainSteps.openMain();
-        mainSteps.clickGetStarted();
-        mainSteps.enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix);
-        mainSteps.submitEMail();
-        FormSteps formSteps = new FormSteps(driver);
-        formSteps.fillForm();
-        formSteps.clickSubmit();
-        formSteps.checkSubmission();
+    public void getStartedTest() {
+        mainSteps.openMain()
+                .clickGetStarted()
+                .enterRandomEMail(RandomGenerator.generateString(5, 12) + emailPostfix)
+                .submitEMail();
+        formSteps.fillForm()
+                .clickSubmit()
+                .checkMessageSuccessfulSubmission();
     }
 
     @Test
     @DisplayName("Twitter reference and icon test")
     @Description("Checking twitter reference. Checking if the picture is actually a picture of twitter")
-    public void twitterTest(){
-        MainSteps mainSteps = new MainSteps(driver);
-        mainSteps.openMain();
-        mainSteps.checkTwitterHref();
+    public void twitterTest() {
+        mainSteps.openMain()
+                .checkTwitterHref();
         mainSteps.checkTwitterData();
     }
 
     @After
-    public void closeDriver(){
+    public void tearDown() {
         driver.quit();
     }
 }

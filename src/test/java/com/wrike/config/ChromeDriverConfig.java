@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChromeDriverConfig {
-    private static WebDriver chromeDriver = null;
 
     static {
         String pathToDrivers = PropertiesConfigurator.getConfigProperties().getProperty("drivers.path");
@@ -14,7 +13,6 @@ public class ChromeDriverConfig {
     }
 
     public static WebDriver getChromeDriver() {
-        chromeDriver = new ChromeDriver();
-        return chromeDriver;
+        return new ChromeDriver();
     }
 }
