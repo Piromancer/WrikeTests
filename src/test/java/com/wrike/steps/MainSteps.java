@@ -47,7 +47,7 @@ public class MainSteps {
 
     @Step("Checking if the link references the right page")
     public void checkTwitterHref() {
-        Assert.assertTrue(main.twitter.getAttribute("href").equals(WRIKE_TWITTER));
+        Assert.assertEquals(main.twitter.getAttribute("href"), WRIKE_TWITTER);
     }
 
     @Step("Checking the data and color match")

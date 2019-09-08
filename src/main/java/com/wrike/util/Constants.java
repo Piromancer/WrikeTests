@@ -9,4 +9,5 @@ public class Constants {
     public static final String IMG_COLOR = PropertiesConfigurator.getConfigProperties().getProperty("test.twitterPictureFill");
     public static final String WRIKE_TWITTER = PropertiesConfigurator.getConfigProperties().getProperty("test.wrikeTwitter");
     public static final String PRIMARY_FORM_ANSWERS_LOCATOR = PropertiesConfigurator.getConfigProperties().getProperty("test.locator.primaryFormXpath");
+    public static final String EMAIL_POSTFIX = PropertiesConfigurator.getConfigProperties().getProperty("test.emailPostfix");
 }
