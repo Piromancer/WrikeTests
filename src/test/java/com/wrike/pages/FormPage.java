@@ -1,4 +1,4 @@
-package com.wrike.page;
+package com.wrike.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

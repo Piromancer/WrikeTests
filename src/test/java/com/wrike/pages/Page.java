@@ -1,11 +1,11 @@
-package com.wrike.page;
+package com.wrike.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class Page {
+abstract class Page {
 
-    public Page(WebDriver driver) {
+    Page(WebDriver driver) {
         PageFactory.initElements(driver,this);
     }
 

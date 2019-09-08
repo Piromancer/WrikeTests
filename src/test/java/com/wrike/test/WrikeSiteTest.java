@@ -1,8 +1,8 @@
 package com.wrike.test;
 
 import com.wrike.config.ChromeDriverConfig;
-import com.wrike.step.FormSteps;
-import com.wrike.step.MainSteps;
+import com.wrike.steps.FormSteps;
+import com.wrike.steps.MainSteps;
 import com.wrike.util.PropertiesConfigurator;
 import com.wrike.util.RandomGenerator;
 import io.qameta.allure.*;
