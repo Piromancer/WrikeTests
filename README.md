@@ -19,4 +19,6 @@ Test framework: junit4
 UI test: selenium 3 (without wrappers)
 Pattern: pageObject (test -> steps -> pages)
 Reporting: allure plugin
-https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEINqkwK7xIgB0iLAnIzoAB6pmsy0EfbRjZxeCphHax6wZKtZXSgSelector: xpath (should be short and stable)
+xpath (should be short and stable)
+
+Browser used: Chrome
